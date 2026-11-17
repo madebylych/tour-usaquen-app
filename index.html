@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hecho en Usaquén: free walking tour gratis por el Distrito Creativo de Usaquén, con app para Android y web.">
+<meta property="og:title" content="Tour Usaquén">
+<meta property="og:description" content="Tu próximo plan con amigos en Usaquén es gratis.">
+<meta property="og:image" content="img/inicio.jpg">
+<meta name="theme-color" content="#FF7A12">
+<title>Tour Usaquén</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400&display=swap">
+<style>
+/* Layout: banda naranja con la palabra gigante y el celular (como la app), luego bandas claras con pasos, funciones y la ruta en tiquetes */
+:root{
+  --naranja:#FF7A12; --naranja-suave:#FFE3CC; --naranja-texto:#9A4300;
+  --tinta:#16130F; --papel:#FBF7F3; --tarjeta:#FFFFFF; --gris:#5E5A57; --borde:#EAE2DA;
+  --sobre-naranja:#16130F;
+  --f:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --naranja:#FF8A2B; --naranja-suave:#3A2412; --naranja-texto:#FFB27A;
+  --tinta:#F5EFE9; --papel:#14110E; --tarjeta:#1E1A16; --gris:#B3AAA2; --borde:#332C26; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --naranja:#FF8A2B; --naranja-suave:#3A2412; --naranja-texto:#FFB27A;
+  --tinta:#F5EFE9; --papel:#14110E; --tarjeta:#1E1A16; --gris:#B3AAA2; --borde:#332C26; color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--f);font-size:17px;line-height:1.5}
+.envoltura{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--naranja);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.03em}
+p{margin:0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+
+/* hero */
+.hero{background:var(--naranja);color:var(--sobre-naranja);overflow:hidden;position:relative}
+.hero .envoltura{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:40px 0}
+.marca{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px 0}
+.marca b{font-weight:900;font-size:20px;letter-spacing:-.02em}
+.gigante{position:absolute;left:-2vw;top:70px;font-weight:900;font-size:clamp(120px,22vw,300px);line-height:.8;letter-spacing:-.06em;color:rgba(255,255,255,.28);pointer-events:none;white-space:nowrap}
+.hero-texto{position:relative;display:flex;flex-direction:column;gap:22px;padding-bottom:56px}
+.hero h1{font-size:clamp(44px,7vw,84px);font-weight:900;line-height:.92}
+.hero .bajada{font-size:clamp(18px,2.2vw,22px);font-weight:500;max-width:30ch}
+.botones{display:flex;flex-wrap:wrap;gap:12px}
+.boton{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:15px 24px;transition:transform .15s ease}
+.boton:hover{transform:translateY(-2px)}
+.boton.principal{background:#16130F;color:#FBF7F3}
+.boton.secundario{background:#FBF7F3;color:#16130F}
+.boton svg{width:20px;height:20px;flex:none}
+.datos-hero{display:flex;flex-wrap:wrap;gap:8px}
+.datos-hero span{background:rgba(255,255,255,.55);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;color:#16130F}
+.telefono-hero{position:relative;justify-self:center;align-self:end;width:min(330px,100%);margin-bottom:-60px}
+.marco{background:#16130F;border-radius:44px;padding:12px;box-shadow:0 30px 60px rgba(60,20,0,.35);transform:rotate(3deg)}
+.marco img{display:block;width:100%;border-radius:34px}
+.sello{position:absolute;top:28px;left:-24px;background:var(--naranja-suave);color:var(--tinta);border:2px dashed currentColor;font-weight:900;font-size:14px;letter-spacing:.1em;padding:8px 12px;transform:rotate(-8deg);z-index:2}
+
+/* secciones */
+section.banda{padding-block:96px 72px}
+.titulo-seccion{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;max-width:640px}
+.titulo-seccion .eyebrow{color:var(--naranja-texto)}
+.titulo-seccion h2{font-size:clamp(32px,4.4vw,48px);font-weight:900;line-height:1}
+.titulo-seccion p{color:var(--gris)}
+
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.paso{background:var(--tarjeta);border:1px solid var(--borde);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.paso .n{width:40px;height:40px;border-radius:50%;background:var(--naranja);color:#16130F;display:grid;place-items:center;font-weight:900}
+.paso h3{font-size:22px}
+.paso p{color:var(--gris)}
+
+.funciones{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.lista-f{display:flex;flex-direction:column;gap:22px}
+.f{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}
+.f .ic{width:52px;height:52px;border-radius:16px;background:var(--naranja-suave);color:var(--naranja-texto);display:grid;place-items:center}
+.f .ic svg{width:26px;height:26px}
+.f h3{font-size:19px;margin-bottom:2px}
+.f p{color:var(--gris)}
+.telefono-f{justify-self:center;width:min(300px,100%)}
+.telefono-f .marco{transform:rotate(-2deg)}
+
+.ruta{background:var(--tinta);color:var(--papel)}
+.ruta .titulo-seccion .eyebrow{color:var(--naranja)}
+.ruta .titulo-seccion p{color:color-mix(in srgb,var(--papel) 70%,transparent)}
+.tiquetes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tiquete{display:flex;align-items:stretch;background:var(--papel);color:var(--tinta);border-radius:16px;overflow:hidden;min-width:0}
+.tiquete b{background:var(--naranja-suave);color:var(--tinta);border-right:2px dashed var(--tinta);display:grid;place-items:center;min-width:64px;font-weight:900;font-size:20px}
+.tiquete div{padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tiquete strong{font-size:17px}
+.tiquete span{font-size:14px;color:var(--gris)}
+.tiquete.extra b{background:var(--naranja)}
+.cifras{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:28px;font-variant-numeric:tabular-nums}
+.cifras div{display:flex;flex-direction:column}
+.cifras strong{font-size:34px;font-weight:900;letter-spacing:-.03em;color:var(--naranja)}
+.cifras span{font-size:14px;color:color-mix(in srgb,var(--papel) 70%,transparent)}
+
+.cierre{background:var(--naranja);color:#16130F;text-align:left}
+.cierre .envoltura{display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;padding-block:72px}
+.cierre h2{font-size:clamp(34px,5vw,58px);font-weight:900;line-height:.98;max-width:16ch}
+.cierre .boton.principal{background:#16130F;color:#FBF7F3}
+footer{padding-block:28px 40px;color:var(--gris);font-size:13px;line-height:1.6}
+footer .envoltura{display:flex;flex-direction:column;gap:6px}
+
+@media (max-width:860px){
+  .hero .envoltura,.funciones{grid-template-columns:1fr}
+  .telefono-hero{margin-bottom:-40px;width:min(280px,82%)}
+  .pasos,.tiquetes{grid-template-columns:1fr}
+  .telefono-f{order:-1}
+  .gigante{top:40px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero-texto>*{animation:sube .6s ease both}
+  .hero-texto>*:nth-child(2){animation-delay:.08s}.hero-texto>*:nth-child(3){animation-delay:.16s}.hero-texto>*:nth-child(4){animation-delay:.24s}
+  .telefono-hero{animation:entra .8s .2s ease both}
+}
+@keyframes sube{from{opacity:.001;transform:translateY(14px)}}
+@keyframes entra{from{opacity:.001;transform:translateY(40px)}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="gigante" aria-hidden="true">Usaquén</div>
+  <div class="envoltura marca"><b>Tour Usaquén</b><span class="eyebrow">Bogotá, Colombia</span></div>
+  <div class="envoltura">
+    <div class="hero-texto">
+      <p class="eyebrow">Free walking tour + app</p>
+      <h1>Hecho en Usaquén</h1>
+      <p class="bajada">Tu próximo plan con amigos en Usaquén es gratis. La app te guía por las personas que hacen, venden, muestran y conservan el distrito.</p>
+      <div class="botones">
+        <a class="boton principal" href="https://expo.dev/artifacts/eas/GFMYQrLFHYDfSmRCQm_OQDk74XGuFWfQoiVGiTBByXI.apk" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Descargar para Android</a>
+        <a class="boton secundario" href="https://madebylych.github.io/tour-usaquen/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg>
+          Abrir en la web</a>
+      </div>
+      <div class="datos-hero"><span>6 lugares</span><span>2,2 km</span><span>Unas 2 horas</span><span>Gratis</span></div>
+    </div>
+    <div class="telefono-hero">
+      <span class="sello">RUTA 01</span>
+      <div class="marco"><img src="img/inicio.jpg" alt="Pantalla de inicio de la app: ruta Hecho en Usaquén con 6 paradas, 2,2 km y la lista de lugares"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="banda" aria-labelledby="t-como">
+    <div class="envoltura">
+      <div class="titulo-seccion"><p class="eyebrow">Cómo funciona</p><h2 id="t-como">Abre la app, camina y descubre</h2>
+        <p>Con guía o por tu cuenta. Salida desde la Plaza de Usaquén, frente a la iglesia, todos los días de 10 a. m. a 4 p. m.</p></div>
+      <div class="pasos">
+        <div class="paso"><span class="n">1</span><h3>Descarga la ruta</h3><p>Instálala en Android o ábrela en la web. Si la descargas antes de salir, funciona sin señal.</p></div>
+        <div class="paso"><span class="n">2</span><h3>Camina hasta cada lugar</h3><p>El GPS descubre la parada cuando llegas. Si falla entre edificios, toca «Ya estoy aquí».</p></div>
+        <div class="paso"><span class="n">3</span><h3>Mira, escucha y sella</h3><p>Lee la historia, cumple el reto de observación, escucha la música del lugar y guarda el sello.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="banda" aria-labelledby="t-func" style="padding-top:24px">
+    <div class="envoltura funciones">
+      <div>
+        <div class="titulo-seccion"><p class="eyebrow">Lo que trae</p><h2 id="t-func">Una app para usar caminando</h2></div>
+        <div class="lista-f">
+          <div class="f"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><h3>Descubre al llegar</h3><p>Cada lugar se revela cuando estás ahí, con vibración y su historia.</p></div></div>
+          <div class="f"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 3v18"/></svg></span><div><h3>Pasaporte con sellos</h3><p>Un sello con fecha por cada lugar y una postal para compartir al final.</p></div></div>
+          <div class="f"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg></span><div><h3>Música en cada lugar</h3><p>Suena sola cuando descubres la parada.</p></div></div>
+          <div class="f"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg></span><div><h3>Sin señal</h3><p>Descarga la ruta y el recorrido sigue funcionando aunque no tengas datos.</p></div></div>
+          <div class="f"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></span><div><h3>Mapa para raspar</h3><p>El mapa se destapa por donde caminas.</p></div></div>
+        </div>
+      </div>
+      <div class="telefono-f"><div class="marco"><img src="img/ruta.jpg" alt="Pantalla de la ruta en la app con el pasaporte, los atajos y la lista de paradas"></div></div>
+    </div>
+  </section>
+
+  <section class="banda ruta" aria-labelledby="t-ruta">
+    <div class="envoltura">
+      <div class="titulo-seccion"><p class="eyebrow">La ruta</p><h2 id="t-ruta">Seis lugares, una cadena</h2>
+        <p>Del pueblo antiguo a quienes hacen, venden, muestran y conservan. Los sábados y domingos suma una parada extra.</p></div>
+      <div class="tiquetes">
+        <div class="tiquete"><b>01</b><div><strong>Plaza de Usaquén</strong><span>Patrimonio que atrae público</span></div></div>
+        <div class="tiquete extra"><b>+</b><div><strong>La Galería de Usaquén</strong><span>Parada extra, sábados y domingos</span></div></div>
+        <div class="tiquete"><b>02</b><div><strong>Huitaca Café</strong><span>Quien elige y muestra</span></div></div>
+        <div class="tiquete"><b>03</b><div><strong>Umbral Galería</strong><span>Quien le pone precio al arte</span></div></div>
+        <div class="tiquete"><b>04</b><div><strong>Hacienda Santa Bárbara</strong><span>Qué se conserva</span></div></div>
+        <div class="tiquete"><b>05</b><div><strong>Estación de Usaquén</strong><span>Qué conectó al pueblo</span></div></div>
+      </div>
+      <div class="cifras">
+        <div><strong>2,2 km</strong><span>a pie, por calles reales</span></div>
+        <div><strong>116 min</strong><span>con paradas y caminata</span></div>
+        <div><strong>$0</strong><span>aporte voluntario al final</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cierre" aria-labelledby="t-cierre">
+    <div class="envoltura">
+      <h2 id="t-cierre">¡Nos vemos en la plaza!</h2>
+      <div class="botones">
+        <a class="boton principal" href="https://expo.dev/artifacts/eas/GFMYQrLFHYDfSmRCQm_OQDk74XGuFWfQoiVGiTBByXI.apk" target="_blank" rel="noopener">Descargar para Android</a>
+        <a class="boton secundario" href="https://madebylych.github.io/tour-usaquen/" target="_blank" rel="noopener">Abrir en la web</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <p>Tour Usaquén es un proyecto del Grupo de trabajo 7, Industrias Culturales y Creativas 1, Universidad El Bosque, 2026.</p>
+    <p>Diseño y desarrollo de la app: Emily Chisaba. Mapa: OpenFreeMap, datos de OpenStreetMap. Música: AlexZavesa, Idoberg, JonasBlakewood y Royalty_Free_Music en Pixabay.</p>
+  </div>
+</footer>
+
+</body>
+</html>
